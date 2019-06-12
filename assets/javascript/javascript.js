@@ -1,3 +1,6 @@
+
+
+
 var orlandoArray = [
     "Orlando",
     "Tourists",
@@ -27,7 +30,7 @@ $("button").on("click", function () {
 
     var APIKey = "1yMPuh6hF03rgqCEbFV4sg11YLk34RET";
     //This is the search term (get this from UI)
-    //var search = "cats";
+    var search = $(this).attr("value");
     //This is the queryURL
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=" + APIKey + "&limit=10";
     //This is the AJAX call
@@ -55,24 +58,19 @@ $("button").on("click", function () {
 
             $("#build").prepend(columnDiv);
         }
-    });
+    })});
 
 
-    //ON-CLICK TO ANIMATE AND PAUSE
-    $(".gif").on("click", function () {
+    $(document).on("click", ".gif", function() {
         var gifState = $(this).attr("data-state");
         console.log(gifState);
-
-        if (gifState == "still") {
-            $(this).attr("data-state", "animate");
-            $(this).attr("src", $(this).attr("data-animate"));
+  
+        if (gifState == "still"){
+          $(this).attr("data-state", "animate");
+          $(this).attr("src", $(this).attr("data-animate"));
         }
-
-        if (gifState == "animate") {
-            $(this).attr("data-state", "still");
-            $(this).attr("src", $(this).attr("data-still"));
-        }
-
-    });
-
-
+  
+        if (gifState == "animate"){
+          $(this).attr("data-state", "still");
+          $(this).attr("src", $(this).attr("data-still"));
+        }});
