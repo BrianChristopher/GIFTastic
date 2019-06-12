@@ -1,36 +1,14 @@
-
-
-
 var topics = [
     "Orlando",
     "Tourists",
     "Disney World",
     "Alligator",
     "Florida Man"
-]
-
-renderButtons = function(){
-    //Clear old buttons
-    $("#buttonBuild").text("");
-for (i = 0; i < topics.length; i++) {
-    
-    //Build buttons from array
-    var newButton = $("<button>").text(topics[i]).addClass("btn btn-secondary m-3").attr({ "type": "button", "value": topics[i] });
-    $("#buttonBuild").append(newButton);
-}
-}
-
-renderButtons();
+];
 
 
-
-
-// GIPHY AJAX CALL AND CARD BUILD FOLLOWS
-//This is the example
-//https://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=YOUR_API_KEY
-//This is the API key  
-
-$("button").on("click", function () {
+//This function puts the renders the GIFS on the page
+displayGifs = function(){
     var search = $(this).attr("value");
 
     var APIKey = "1yMPuh6hF03rgqCEbFV4sg11YLk34RET";
@@ -64,7 +42,29 @@ $("button").on("click", function () {
             $("#build").prepend(columnDiv);
         }
     })
+}
+
+//This function creates buttons from the topics array
+function renderButtons(){
+    //Clear old buttons
+    $("#buttonBuild").text("");
+for (i = 0; i < topics.length; i++) {
+    
+    //Build buttons from array
+    var newButton = $("<button>").text(topics[i]).addClass("btn btn-secondary m-3 topicButton").attr({ "type": "button", "value": topics[i] });
+    $("#buttonBuild").append(newButton);
+}};
+
+//This takes user input from form and adds it to the topics array and therefore the topics button
+$("#submitUserInput").on("click", function(event){
+    event.preventDefault();
+    var newTopic = $("#userInput").val().trim();
+    topics.push(newTopic);
+    renderButtons();
 });
+
+//This adds a click event listener for topic buttons
+$(document).on("click", ".topicButton", displayGifs);
 
 
 $(document).on("click", ".gif", function () {
@@ -82,10 +82,5 @@ $(document).on("click", ".gif", function () {
     }
 });
 
+renderButtons();
 
-$(document).on("click", "#submit", function () {
-     
-    console.log(userInput);
-
-   
-});
