@@ -51,7 +51,7 @@ function renderButtons(){
 for (i = 0; i < topics.length; i++) {
     
     //Build buttons from array
-    var newButton = $("<button>").text(topics[i]).addClass("btn btn-secondary m-3 topicButton").attr({ "type": "button", "value": topics[i] });
+    var newButton = $("<button>").text(topics[i]).addClass("btn btn-dark m-3 topicButton").attr({ "type": "button", "value": topics[i] });
     $("#buttonBuild").append(newButton);
 }};
 
