@@ -1,7 +1,7 @@
 
 
 
-var orlandoArray = [
+var topics = [
     "Orlando",
     "Tourists",
     "Disney World",
@@ -9,13 +9,18 @@ var orlandoArray = [
     "Florida Man"
 ]
 
-for (i = 0; i < orlandoArray.length; i++) {
-
-    var newButton = $("<button>").text(orlandoArray[i]).addClass("btn btn-secondary m-3").attr({ "type": "button", "value": orlandoArray[i] });
+renderButtons = function(){
+    //Clear old buttons
+    $("#buttonBuild").text("");
+for (i = 0; i < topics.length; i++) {
+    
+    //Build buttons from array
+    var newButton = $("<button>").text(topics[i]).addClass("btn btn-secondary m-3").attr({ "type": "button", "value": topics[i] });
     $("#buttonBuild").append(newButton);
 }
+}
 
-
+renderButtons();
 
 
 
@@ -37,7 +42,7 @@ $("button").on("click", function () {
     $.ajax({
         url: queryURL,
         method: "GET"
-        }).then(function (response) {
+    }).then(function (response) {
         var results = response.data;
 
         for (var i = 0; i < results.length; i++) {
@@ -58,19 +63,29 @@ $("button").on("click", function () {
 
             $("#build").prepend(columnDiv);
         }
-    })});
+    })
+});
 
 
-    $(document).on("click", ".gif", function() {
-        var gifState = $(this).attr("data-state");
-        console.log(gifState);
-  
-        if (gifState == "still"){
-          $(this).attr("data-state", "animate");
-          $(this).attr("src", $(this).attr("data-animate"));
-        }
-  
-        if (gifState == "animate"){
-          $(this).attr("data-state", "still");
-          $(this).attr("src", $(this).attr("data-still"));
-        }});
+$(document).on("click", ".gif", function () {
+    var gifState = $(this).attr("data-state");
+    console.log(gifState);
+
+    if (gifState == "still") {
+        $(this).attr("data-state", "animate");
+        $(this).attr("src", $(this).attr("data-animate"));
+    }
+
+    if (gifState == "animate") {
+        $(this).attr("data-state", "still");
+        $(this).attr("src", $(this).attr("data-still"));
+    }
+});
+
+
+$(document).on("click", "#submit", function () {
+     
+    console.log(userInput);
+
+   
+});
